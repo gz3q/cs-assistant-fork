@@ -1,11 +1,9 @@
 import hashlib
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from sqlalchemy import func, update
 
 from src.config.logger import get_logger
 from src.infrastructure.db import async_session_factory
-from src.infrastructure.db.models import SourceRow
 from src.infrastructure.db.repository import Repository
 from src.ingestion.scrapers.html_scraper import scrape
 from src.retrieval.services import embedding_service
@@ -75,9 +73,7 @@ async def ingest_url(url: str) -> None:
                 source_id=source.id,
             )
 
-        await session.execute(
-            update(SourceRow).where(SourceRow.id == source.id).values(last_synced_at=func.now())
-        )
+        await Repository.update_source_synced(session, source.id)
         await session.commit()
 
     log.info("ingest_complete", url=url, n_chunks=len(chunks))

@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from sqlalchemy import func, select
+from sqlalchemy import func, select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -60,9 +60,9 @@ class Repository:
 
     @staticmethod
     async def update_source_synced(session: AsyncSession, source_id: UUID) -> None:
-        result = await session.execute(select(SourceRow).where(SourceRow.id == source_id))
-        source = result.scalar_one()
-        source.last_synced_at = func.now()
+        await session.execute(
+            update(SourceRow).where(SourceRow.id == source_id).values(last_synced_at=func.now())
+        )
 
     @staticmethod
     async def top_k_chunks(
