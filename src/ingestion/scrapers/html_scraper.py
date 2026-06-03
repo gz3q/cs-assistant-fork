@@ -19,6 +19,7 @@ def scrape(url: str) -> tuple[str, str | None]:
 
     # Known limitations (tracked as a separate ticket):
     #  - Misses content inside aria-hidden="true" accordions (common on FAQ pages)
+    #  - Misses question text but gets answer text on other FAQ pages, we should get both
     #  - Link formatting is markdown-style and may need cleanup downstream
     # Improving extraction quality is a tuning ticket, not a blocker for development.
     text = (

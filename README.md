@@ -178,6 +178,20 @@ the grounding approach.
 
 ---
 
+## Make commands
+
+Every command runs through `uv run`, so you never need to activate the venv.
+
+| Command | What it does |
+|---|---|
+| `make setup` | `uv sync` — install all runtime + dev dependencies |
+| `make migrate` | Apply Alembic migrations (enable pgvector, create tables) |
+| `make ingest` | Scrape, chunk, embed, and store every URL in `list.json` |
+| `make cli` | Open the question REPL against the ingested data |
+| `make lint` | Run ruff (lint only, no changes) |
+| `make format` | Run black (rewrites files in place) |
+| `make test` | Run the pytest suite (requires Docker running) |
+
 ## Running checks locally
 
 Run these before pushing to match what CI will check:
@@ -206,11 +220,11 @@ isolated and the schema is never dropped between runs.
 
 ```
 src/
-  apps/           Entry points: dev_cli.py (working REPL), discord_bot.py
-                  and api.py (stubs — logic lives in the services, not here)
+  apps/           Entry points: dev_cli.py (working REPL) and discord_bot.py
+                  (stub — logic lives in the services, not here)
   completions/    System prompt and completion_service.ask() — the function
                   that ties retrieval + LLM together
-  config/         pydantic-settings (Settings), structlog setup, Celery config
+  config/         pydantic-settings (Settings), logging setup, Celery config
   domain/         Shared types: Chunk, RetrievedChunk, Source, Answer
   infrastructure/
     db/           SQLAlchemy models, Alembic migrations (versions/), repository
@@ -251,7 +265,9 @@ docker/
 
 ## How it works
 
-The pipeline runs fully locally during development:
+The pipeline runs fully locally during development. Ingestion happens offline
+(populating the vector store); querying happens per question and reuses the same
+embedding model so questions and chunks live in the same vector space.
 
 1. **Ingest** — a curated list of URLs (`data/webpages/list.json`) is scraped
    with httpx + trafilatura, split into ~1500-character chunks with 200-character
@@ -272,6 +288,22 @@ Hosted production deployment is a future goal. Today everything runs on your
 machine.
 
 ---
+
+## Notes for contributors
+
+A few things worth keeping in mind:
+
+- **Make sure to install the pre-commit hook after cloning** (`uv run pre-commit install`).
+  Without it, ruff and black won't run on
+  commit, and CI will fail on formatting you could have caught locally.
+- **Auto-fixes abort the commit on purpose.** When a hook reformats a file, the
+  commit stops and the changes are left unstaged. Re-`git add` the files and
+  commit again — this is expected, not a failure.
+- **Don't change `src/domain/types.py` without discussing it first.** The shared
+  domain types (`Chunk`, `RetrievedChunk`, `Source`, `Answer`) are a contract
+  that every layer depends on — the repository, retrieval, and completions all
+  convert at that boundary. Open an issue before touching it so the change can be
+  coordinated across layers.
 
 ## Troubleshooting / known constraints
 

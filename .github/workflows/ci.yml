@@ -50,5 +50,5 @@ jobs:
         with:
           enable-cache: true
           python-version: "3.12"
-      - run: uv sync
+      - run: uv sync --frozen
       - run: uv run pytest

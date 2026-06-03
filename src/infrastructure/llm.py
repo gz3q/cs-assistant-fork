@@ -6,6 +6,7 @@ from src.config.logger import get_logger
 log = get_logger(__name__)
 
 # nomic-embed-text recommends task-specific prefixes for best retrieval quality.
+# model may change in the future, but keep for now
 # See https://huggingface.co/nomic-ai/nomic-embed-text-v1.5
 EMBED_DOCUMENT_PREFIX = "search_document: "
 EMBED_QUERY_PREFIX = "search_query: "

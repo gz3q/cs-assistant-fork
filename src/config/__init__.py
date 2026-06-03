@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     ollama_chat_model: str
     ollama_embedding_model: str
     embedding_dim: int
-    top_k: int = 5
+    top_k: int = 3
     test_database_url: str | None = None
 
 

@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "RAG-based assistant for Carleton CS students"
 requires-python = ">=3.12"
 dependencies = [
-    "fastapi",
     "pydantic>=2",
     "pydantic-settings",
     "sqlalchemy[asyncio]",
@@ -16,7 +15,6 @@ dependencies = [
     "langchain-text-splitters",
     "celery",
     "redis",
-    "structlog",
 ]
 
 [dependency-groups]
