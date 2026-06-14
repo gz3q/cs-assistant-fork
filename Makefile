@@ -6,6 +6,9 @@ setup:
 cli:
 	uv run python -m src.apps.dev_cli
 
+discord:
+	uv run python -m src.apps.discord_bot
+
 migrate:
 	uv run alembic -c src/infrastructure/db/alembic.ini upgrade head
 

@@ -15,6 +15,7 @@ dependencies = [
     "langchain-text-splitters",
     "celery",
     "redis",
+    "discord-py>=2.7.1",
 ]
 
 [dependency-groups]

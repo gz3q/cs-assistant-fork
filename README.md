@@ -150,6 +150,41 @@ ask> what electives should I take for a software engineering focus?
 
 You should see an answer followed by a `Sources:` block listing the URLs used.
 
+### 10. (Optional) Run the Discord bot
+
+The bot exposes the same Q&A flow as `make cli` through a `/ask` slash command,
+so it needs the full backend already working: Docker up, `make migrate` and
+`make ingest` run, and Ollama serving. The CLI is enough for most development —
+this step is only needed if you're working on the bot itself.
+
+You'll need your own throwaway Discord server and bot to develop against:
+
+1. In the [Discord Developer Portal](https://discord.com/developers/applications),
+   create an application, then under **Bot** click **Reset Token** and copy the
+   token. No privileged intents are required — `/ask` uses default intents.
+2. Under **OAuth2 → URL Generator**, select the `bot` and `applications.commands`
+   scopes, open the generated URL, and invite the bot to a server you own.
+3. Enable **Settings → Advanced → Developer Mode**, then right-click your server
+   icon → **Copy Server ID**.
+4. Add both values to your `.env`:
+
+   ```
+   DISCORD_BOT_TOKEN=your_token_here
+   DISCORD_GUILD_ID=your_server_id_here
+   ```
+
+5. Start the bot:
+
+   ```bash
+   make discord
+   ```
+
+`/ask` is synced to your server on startup, so it appears immediately. Invoking
+it defers the reply (Discord's 3-second ack), then sends the answer and its
+sources as a follow-up once `ask()` finishes — expect the same 1–3 minute local
+latency as the CLI. If the token or server ID is missing, the bot exits at
+startup with a message.
+
 ---
 
 ## Using it
@@ -188,6 +223,7 @@ Every command runs through `uv run`, so you never need to activate the venv.
 | `make migrate` | Apply Alembic migrations (enable pgvector, create tables) |
 | `make ingest` | Scrape, chunk, embed, and store every URL in `list.json` |
 | `make cli` | Open the question REPL against the ingested data |
+| `make discord` | Run the Discord bot (`/ask` slash command) — see setup step 10 |
 | `make lint` | Run ruff (lint only, no changes) |
 | `make format` | Run black (rewrites files in place) |
 | `make test` | Run the pytest suite (requires Docker running) |
