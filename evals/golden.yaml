@@ -1,0 +1,98 @@
+- question: "What courses should I take in first year?"
+  expected_answer: "In first year, take these 5 required courses: COMP 1405 (Intro to CS I), COMP 1805 (Discrete Structures I), COMP 1406 (Intro to CS II), MATH 1007 (Elementary Calculus), and MATH 1104 (Linear Algebra) in addition to any electives. Your stream may also require additional courses to be taken in first year."
+  expected_sources:
+    - "https://ccss.carleton.ca/resources/faqs/which-courses-in-first-year/"
+    - "https://calendar.carleton.ca/undergrad/undergradprograms/computerscience/"
+    - "https://carleton.ca/registration/course-selection-guide/bcs/"
+
+- question: "What is a Breadth Elective vs a Free Elective?"
+  expected_answer: "Breadth Electives must be from: the Faculty of Arts and Social Sciences, the Faculty of Public and Global Affairs, the Sprott School of Business, or the Faculty of Science. They cannot be in COMP, MATH, STAT, CSEC, DATA, or Engineering, and cannot be prohibited courses. Free Electives can be any non-prohibited course from any department, including COMP, MATH, STAT, and Engineering courses. After fulfilling the breadth requirement, additional breadth courses count as free electives. Computer Science students cannot register for CSEC or DATA courses, but pre-transfer courses in these areas count as free electives."
+  expected_sources:
+    - "https://ccss.carleton.ca/resources/faqs/free-vs-breadth-electives/"
+    - "https://calendar.carleton.ca/undergrad/undergradprograms/computerscience/#text:~:text=Course%20Categories%20%28B.C.S.%29"
+    - "https://carleton.ca/scs/current-students/undergraduate-students/courses-and-registration/#UG_electives_and_prohibited:~:text=a%20payment.-,Electives%20and%20Prohibited%20Courses,-Electives%20are%20courses"
+
+- question: "Do we register for both fall and winter courses now?"
+  expected_answer: "Yes, you should register for both fall and winter courses as soon as your time ticket opens to secure the classes you want. Even if you're unsure, tentatively register for some courses to avoid losing your spot. You can switch or drop courses until the first few weeks of each semester."
+  expected_sources:
+    - "https://ccss.carleton.ca/resources/faqs/should-i-register-for-both-terms/"
+    - "https://carleton.ca/registration/dates/timetickets/"
+    - "https://carleton.ca/registration/academic-dates/"
+
+- question: "Can I switch courses after registering?"
+  expected_answer: "Yes, you can switch courses until the first few weeks of each semester, and you can check the academic calendar for specific deadlines. If a course is full, you may join a waitlist (if available) and register for an alternative course temporarily, then switch later if a spot opens. Students commonly make schedule changes at the start of each semester, so check back regularly for openings."
+  expected_sources:
+    - "https://ccss.carleton.ca/resources/faqs/switch-courses-after-registering/"
+    - "https://carleton.ca/registration/academic-dates/"
+    - "https://carleton.ca/registration/waitlisting/"
+
+- question: "How many courses should I take in a semester?"
+  expected_answer: "Full-time students generally take 2.5 credits per term (usually 5 courses), but it's fairly common to take 2.0 credits (4 courses) for a lighter workload. Before deciding, consult an academic advisor to discuss your specific situation, as a reduced course load could impact your full-time status, tuition costs, residence/scholarship eligibility, government funding (like OSAP), co-op eligibility, and visas for international students."
+  expected_sources:
+    - "https://ccss.carleton.ca/resources/faqs/how-many-courses-in-a-semester/"
+    - "https://carleton.ca/academicadvising/"
+    - "https://carleton.ca/academicadvising/reduced-course-load/"
+
+- question: "What is the difference between a lecture and tutorial?"
+  expected_answer: "Lectures are the main part of a course where instructors cover course material, and midterms often take place during lecture time slots. Tutorials are additional sessions led by teaching assistants that supplement learning with practical exercises or short quizzes, with formats varying by course and explained in the course outline. If a course has a tutorial, you must register for both a lecture section and an associated tutorial section."
+  expected_sources:
+    - "https://ccss.carleton.ca/resources/faqs/lectures-vs-tutorials/"
+
+- question: "Are COMP 1005/1006 and 1405/1406 Different?"
+  expected_answer: "COMP 1005/1006 and COMP 1405/1406 have the exact same content with no difference in lectures or instructors. The only difference is their intended audience: COMP 1005/1006 are for students in other programs taking them as electives, while COMP 1405/1406 are for Bachelor of Computer Science students. As a Computer Science student, you should register in COMP 1405 and 1406."
+  expected_sources:
+    - "https://ccss.carleton.ca/resources/faqs/comp-1005-1006-vs-1405-1406/"
+
+- question: "When can I register for courses?"
+  expected_answer: "You can register for courses based on your time ticket, which you can find in the 'getting started' section of the registration menu in Carleton Central. It's strongly recommended to register as soon as your time ticket opens, but you can make changes until a few weeks into the semester, and check the academic calendar for specific adding/dropping deadlines."
+  expected_sources:
+    - "https://ccss.carleton.ca/resources/faqs/what-are-time-tickets/"
+    - "https://carleton.ca/registration/dates/timetickets/"
+    - "https://carleton.ca/registration/academic-dates/"
+
+- question: "Can I take second year courses in first year?"
+  expected_answer: "Yes, you may be able to take some 2000-level or higher courses if you meet the prerequisite requirements. Prerequisites include having passing grades in certain courses or meeting specific year standing, and you can find these requirements in the course description in the undergraduate calendar. You may submit a registration override request to register without meeting prerequisites, but these are reviewed case-by-case and not guaranteed to be approved."
+  expected_sources:
+    - "https://ccss.carleton.ca/resources/faqs/can-i-take-2000-level-courses-in-first-year/"
+    - "https://carleton.ca/academicadvising/degree-requirements/"
+    - "https://calendar.carleton.ca/undergrad/courses/"
+    - "https://carleton.ca/registration/override-requests/"
+
+- question: "What is a prerequisite?"
+  expected_answer: "A prerequisite is a course that must be successfully completed with a minimum grade of D- or above (unless otherwise noted) before you can register for a dependent course. Prerequisites ensure your knowledge is adequate to understand the new material. Students must consult the current Undergraduate Calendar to identify required prerequisites for specific courses, as some COMP courses may require a grade higher than D-. Carleton's School of Computer Science strictly enforces these calendar prerequisites."
+  expected_sources:
+    - "https://carleton.ca/scs/current-students/bachelor-of-cybersecurity/bcyber-courses-and-registration/"
+    - "https://calendar.carleton.ca/undergrad/"
+
+- question: "What is a preclusion?"
+  expected_answer: "When two courses have very similar or overlapping material, Carleton's Undergraduate Calendar may indicate that they preclude one another, meaning you cannot count both courses toward your degree requirements. Precluded courses are not necessarily equivalent, so you should not assume that one course can substitute for another simply because it precludes the other. Always confirm with your Undergraduate Advisors before assuming substitution. If you take a precluding course after already completing the other, the most recent grade will count. All preclusions are listed in each course's description in the Undergraduate Calendar."
+  expected_sources:
+    - "https://carleton.ca/scs/current-students/bachelor-of-cybersecurity/bcyber-courses-and-registration/"
+    - "https://calendar.carleton.ca/undergrad/"
+
+- question: "Where are the CSEC courses on the Public Class Schedule"
+  expected_answer: "Carleton's Bachelor of Cybersecurity program is introducing all new CSEC courses into its curriculum, which will be developed and released progressively as the first cohort advances. The release schedule is: 2000-level CSEC courses in 2026-27, 3000-level in 2027-28, and remaining 4000-level in 2028-29. As of May 2025, all core CSEC courses are listed in the Undergraduate Calendar but will not appear on the public class schedule until they are first offered."
+  expected_sources:
+    - "https://carleton.ca/scs/current-students/bachelor-of-cybersecurity/bcyber-courses-and-registration/"
+    - "https://calendar.carleton.ca/undergrad/"
+
+- question: "Do I have to follow the course pattern for my admit year?"
+  expected_answer: "Students are encouraged to follow the provided course pattern towards graduation, as it will guarantee a conflict-free schedule each year and ensure you meet all prerequisite requirements each term. If you are off-pattern or plan to deviate from your provided course pattern, you should check in with one of your Undergraduate Advisors to discuss considerations for planning your courses towards graduation."
+  expected_sources:
+    - "https://carleton.ca/scs/current-students/bachelor-of-cybersecurity/bcyber-courses-and-registration/"
+    - "https://carleton.ca/scs/our-people/school-of-computer-science-administration/administrative-staff/undergraduate-advisor/"
+
+- question: "Will a major degree prevent me from going on to graduate studies?"
+  expected_answer: "An Honours degree is generally preferred for Master's or Ph.D. applications in computer science, as many universities require it or an equivalent for graduate admission. However, students with high grades from a Major degree may still be considered for graduate work."
+  expected_sources:
+    - "https://carleton.ca/scs/current-students/undergraduate-students/"
+
+- question: "Do I need to choose a stream?"
+  expected_answer: "No, you do not need to choose a stream to earn a Bachelor of Computer Science degree from the 20-credit program. Elective courses allow you to tailor your degree across various topics, and most stream-related courses are accessible without being in the stream (if no restrictions exist and space is available). However, some courses are restricted to students registered in a specific stream, so selecting a stream helps guarantee access to required stream-related courses."
+  expected_sources:
+    - "https://carleton.ca/scs/current-students/undergraduate-students/"
+
+- question: "How do prospective employers view a stream?"
+  expected_answer: "A stream allows you to specialize in a particular field, which may improve your fit for jobs in that area. For example, a Software Engineering stream designation signals specialty knowledge and may slightly help your resume for software engineering-focused roles. However, high grades are likely more valuable than a stream designation, as an A+ student without the stream is better than a B student with it, since all students complete software engineering courses."
+  expected_sources:
+    - "https://carleton.ca/scs/current-students/undergraduate-students/"
