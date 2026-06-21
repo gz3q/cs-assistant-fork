@@ -15,6 +15,22 @@ class Repository:
         return result.scalar_one_or_none() is not None
 
     @staticmethod
+    async def get_source_and_chunk_counts(session: AsyncSession) -> tuple[int, int]:
+        count_sources = await Repository.count_sources(session)
+        count_chunks = await Repository.count_chunks(session)
+        return count_sources, count_chunks
+
+    @staticmethod
+    async def count_chunks(session: AsyncSession) -> int:
+        result = await session.execute(select(func.count(ChunkRow.id)))
+        return result.scalar_one()
+
+    @staticmethod
+    async def count_sources(session: AsyncSession) -> int:
+        result = await session.execute(select(func.count(SourceRow.id)))
+        return result.scalar_one()
+
+    @staticmethod
     async def get_or_create_source(
         session: AsyncSession, *, name: str, url: str, source_type: str
     ) -> SourceRow:

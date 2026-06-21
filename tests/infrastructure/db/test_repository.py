@@ -119,3 +119,31 @@ async def test_upsert_idempotent_and_updates_on_conflict(session: AsyncSession):
     )
     row = row_result.scalar_one()
     assert row.content == "version 2", "Upsert should update content on conflict"
+
+
+async def test_get_source_and_chunk_counts(session: AsyncSession):
+    initial_sources, initial_chunks = await Repository.get_source_and_chunk_counts(session)
+
+    source = await Repository.get_or_create_source(
+        session, name="Test Source", url="https://example.com/test", source_type="html"
+    )
+
+    current_sources, current_chunks = await Repository.get_source_and_chunk_counts(session)
+    assert current_sources == initial_sources + 1
+    assert current_chunks == initial_chunks
+    embedding = [0.1] * settings.embedding_dim
+
+    await Repository.upsert_chunk(
+        session,
+        content="Test content about Carleton CS",
+        embedding=embedding,
+        source_url="https://example.com/test",
+        source_type="html",
+        section_heading="Overview",
+        content_hash="hash_query_test_001",
+        source_id=source.id,
+    )
+
+    final_sources, final_chunks = await Repository.get_source_and_chunk_counts(session)
+    assert final_sources == initial_sources + 1
+    assert final_chunks == initial_chunks + 1
