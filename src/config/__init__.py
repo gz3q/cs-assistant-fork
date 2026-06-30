@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     ollama_embedding_model: str
     embedding_dim: int
     top_k: int = 3
+    ingest_url_list: str = "data/webpages/list.json"
     test_database_url: str | None = None
     discord_bot_token: str | None = None
     discord_guild_id: int | None = None

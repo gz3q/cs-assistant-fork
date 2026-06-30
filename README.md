@@ -136,6 +136,15 @@ Scrapes, chunks, embeds, and stores all URLs listed in
 `data/webpages/list.json`. You'll see structured log output for each URL.
 Re-running is safe — unchanged content is skipped.
 
+> **Local dev tip:** embedding the full list with a local model can be slow. For
+> faster iteration, set `INGEST_URL_LIST` in your `.env` to the smaller curated
+> subset (1-2 pages per category, exercising every page type), then `make ingest`
+> as usual:
+>
+> ```bash
+> INGEST_URL_LIST=data/webpages/test_list.json
+> ```
+
 ### 9. Ask a question
 
 ```bash
