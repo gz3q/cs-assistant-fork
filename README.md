@@ -243,6 +243,7 @@ Every command runs through `uv run`, so you never need to activate the venv.
 | `make lint` | Run ruff (lint only, no changes) |
 | `make format` | Run black (rewrites files in place) |
 | `make test` | Run the pytest suite (requires Docker running) |
+| `make cov` | Run the suite and write a browsable HTML coverage report to `htmlcov/index.html` |
 
 ## Running checks locally
 

@@ -1,4 +1,4 @@
-.PHONY: setup cli migrate ingest test lint format
+.PHONY: setup cli migrate ingest test cov lint format
 
 setup:
 	uv sync
@@ -17,6 +17,10 @@ ingest:
 
 test:
 	uv run pytest
+
+cov:
+	uv run pytest --cov-report=html
+	@echo "HTML coverage report: htmlcov/index.html"
 
 lint:
 	uv run ruff check .
