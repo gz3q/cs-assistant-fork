@@ -1,9 +1,14 @@
+from pathlib import Path
+
 import pytest
-from sqlalchemy import text
+from alembic import command
+from alembic.config import Config
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 
 from src.config import settings
-from src.infrastructure.db.models import Base
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+ALEMBIC_INI = REPO_ROOT / "src" / "infrastructure" / "db" / "alembic.ini"
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -35,20 +40,28 @@ def safety_check():
 
 @pytest.fixture(scope="session")
 async def db_engine():
-    """Creates tables once per test session; drops them on teardown.
+    """Builds the schema once per session by running Alembic migrations.
+
+    Uses the same migrations as dev/prod (not Base.metadata.create_all) so tests
+    exercise the exact DDL that ships, catching model/migration drift. `downgrade
+    base` on both ends resets tables AND clears alembic_version (drop_all wouldn't),
+    so the next upgrade isn't a no-op.
 
     WARNING: resets the test database — never point at a DB with real data.
     The safety_check fixture guards against this.
     """
+    cfg = Config(str(ALEMBIC_INI))
+    cfg.set_main_option(
+        "sqlalchemy.url", settings.test_database_url.replace("+asyncpg", "+psycopg2")
+    )
+
+    command.downgrade(cfg, "base")  # clean slate; no-op if already empty
+    command.upgrade(cfg, "head")
+
     engine = create_async_engine(settings.test_database_url)
-    async with engine.begin() as conn:
-        await conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
-        await conn.run_sync(Base.metadata.drop_all)
-        await conn.run_sync(Base.metadata.create_all)
     yield engine
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all)
     await engine.dispose()
+    command.downgrade(cfg, "base")
 
 
 @pytest.fixture

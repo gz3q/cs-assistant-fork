@@ -26,7 +26,7 @@ def _sync_url() -> str:
 
 def run_migrations_offline() -> None:
     context.configure(
-        url=_sync_url(),
+        url=config.get_main_option("sqlalchemy.url") or _sync_url(),
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
@@ -37,7 +37,9 @@ def run_migrations_offline() -> None:
 
 def run_migrations_online() -> None:
     cfg = config.get_section(config.config_ini_section, {})
-    cfg["sqlalchemy.url"] = _sync_url()
+    # Use a URL set on the Config (the test harness does this) if present,
+    # otherwise fall back to settings.database_url (the CLI default).
+    cfg["sqlalchemy.url"] = config.get_main_option("sqlalchemy.url") or _sync_url()
     connectable = engine_from_config(cfg, prefix="sqlalchemy.", poolclass=pool.NullPool)
     with connectable.connect() as connection:
         context.configure(connection=connection, target_metadata=target_metadata)
