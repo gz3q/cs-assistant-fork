@@ -1,0 +1,39 @@
+name: Discord 404 checker (cron + PR paths + manual test)
+
+on:
+  schedule:
+    # Weekly (Monday 09:00 UTC)
+    - cron: "0 9 * * 1"
+  pull_request:
+    paths:
+      - ".github/workflows/test_list.json"
+      - ".github/workflows/list.json"
+  workflow_dispatch: {}
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          python-version: "3.12"
+
+      - name: Sync dependencies
+        run: uv sync --frozen
+
+      - name: Run script
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          USER_ID: ${{ secrets.USER_ID }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          uv run -u python scripts/link_checker.py
