@@ -75,10 +75,10 @@ def main():
     #     send_discord(webhook, broken_links)
 
     # to test the workflow, we will use the okay_links
-    if okay_links and event_name == "schedule":
+    if okay_links and event_name in ("schedule", "workflow_dispatch"):
         okay_links.insert(0, f"<@{user_id}>, these links are broken! ⚠️")
         okay_links.append(f"<{run_url}|Here is the WORKFLOW!>")
-        send_discord(webhook, broken_links)
+        send_discord(webhook, okay_links)
     # dict[str, int]
     # # for loop to go through
     # # 1. Broken (fail): 404, 410, Connection refused
