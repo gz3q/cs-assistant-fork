@@ -30,6 +30,7 @@ jobs:
         run: uv sync --frozen
 
       - name: Run script
+        working-directory: ${{ github.workspace }}
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           USER_ID: ${{ secrets.USER_ID }}
