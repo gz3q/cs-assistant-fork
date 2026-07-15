@@ -60,14 +60,6 @@ def main():
             case _ if value in OKAY_STATUS_CODES:
                 okay_links.append(f"🟩 **status code: {value}** | {key}")
 
-    with open(summary_path, "a", encoding="utf-8") as f:
-        f.write(f"Broken: {broken_links}")
-        f.write(f"Unverifiable: {warning_links}")
-        f.write(f"OK: {okay_links}")
-
-        if broken_links:
-            sys.exit(1)
-
     # for broken_links, this is the main shit
     # if broken_links and event_name == "schedule":
     #     broken_links.insert(0, f"<@{user_id}>, these links are broken! ⚠️")
@@ -75,10 +67,27 @@ def main():
     #     send_discord(webhook, broken_links)
 
     # to test the workflow, we will use the okay_links
+    log.info("event_name=%s", event_name)
+    log.info(
+        "broken_links=%d unverifiable_links=%d okay_links=%d",
+        len(broken_links),
+        len(warning_links),
+        len(okay_links),
+    )
+
     if okay_links and event_name in ("schedule", "workflow_dispatch"):
+        log.info("Sending Discord webhook with %d OK lines", len(okay_links))
         okay_links.insert(0, f"<@{user_id}>, these links are broken! ⚠️")
         okay_links.append(f"<{run_url}|Here is the WORKFLOW!>")
         send_discord(webhook, okay_links)
+
+    with open(summary_path, "a", encoding="utf-8") as f:
+        f.write(f"Broken: {broken_links}")
+        f.write(f"Unverifiable: {warning_links}")
+        f.write(f"OK: {okay_links}")
+
+        if broken_links:
+            sys.exit(1)
     # dict[str, int]
     # # for loop to go through
     # # 1. Broken (fail): 404, 410, Connection refused
