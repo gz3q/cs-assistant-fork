@@ -4,7 +4,8 @@ import os
 import random
 import urllib.error
 import urllib.request
-from asyncio.graph import sys
+import sys
+
 from pathlib import Path
 
 import httpx
