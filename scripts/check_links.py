@@ -1,5 +1,6 @@
 import asyncio
 import json
+import logging
 import os
 import random
 import sys
@@ -9,9 +10,8 @@ from pathlib import Path
 
 import httpx
 
-from src.config.logger import get_logger
-
-log = get_logger(__name__)
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
 
 # REPO_ROOT works only if this script is in /scripts
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -35,9 +35,9 @@ def main():
     webhook = os.environ["DISCORD_WEBHOOK_URL"]
     # user id of the user we want to ping
     user_id = os.environ["USER_ID"]
-    summary_path = os.environ["GITHUB_STEP_SUMMMARY"]
+    summary_path = os.environ["GITHUB_STEP_SUMMARY"]
     run_url = os.environ["RUN_URL"]
-    event_name = os.environ.get("EVENT NAME", "")
+    event_name = os.environ.get("EVENT_NAME", "")
 
     urls = []
     broken_links = []
