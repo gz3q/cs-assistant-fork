@@ -75,6 +75,15 @@ def main():
         len(okay_links),
     )
 
+    print(f"event_name={event_name}")
+    print(
+        f"broken_links={len(broken_links)}"
+        + "warning_links={len(warning_links)} okay_links={len(okay_links)}"
+    )
+
+    log.info("about to try discord send (diagnostic)")
+    send_discord(webhook, ["test message ✅", f"event_name={event_name}"])
+
     if okay_links and event_name in ("schedule", "workflow_dispatch"):
         log.info("Sending Discord webhook with %d OK lines", len(okay_links))
         okay_links.insert(0, f"<@{user_id}>, these links are broken! ⚠️")
