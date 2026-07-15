@@ -36,4 +36,4 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           EVENT_NAME: ${{ github.event_name }}
         run: |
-          uv run -u python scripts/link_checker.py
+          uv run python scripts/link_checker.py

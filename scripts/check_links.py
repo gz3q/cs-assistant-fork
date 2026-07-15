@@ -1,14 +1,13 @@
+import asyncio
 import json
 import os
+import random
 import urllib.error
 import urllib.request
-import asyncio
-
 from asyncio.graph import sys
-import httpx
-import random
-
 from pathlib import Path
+
+import httpx
 
 from src.config.logger import get_logger
 
