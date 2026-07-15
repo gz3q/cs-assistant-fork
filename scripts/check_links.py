@@ -2,9 +2,9 @@ import asyncio
 import json
 import os
 import random
+import sys
 import urllib.error
 import urllib.request
-from asyncio.graph import sys
 from pathlib import Path
 
 import httpx
