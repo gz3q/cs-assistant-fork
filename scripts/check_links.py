@@ -68,7 +68,7 @@ def main():
     if okay_links and event_name in ("schedule", "workflow_dispatch"):
         log.info("Sending Discord webhook with %d OK lines", len(okay_links))
         okay_links.insert(0, f"<@{user_id}>, these links are broken! ⚠️")
-        okay_links.insert(1, f"<{run_url}|Here is the WORKFLOW!>")
+        okay_links.insert(1, f"[Here is the WORKFLOW!]({run_url})")
         send_discord(webhook, okay_links)
 
     with open(summary_path, "a", encoding="utf-8") as f:
