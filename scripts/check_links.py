@@ -1,17 +1,17 @@
 import asyncio
-import sys
 import json
 import os
+import sys
 from pathlib import Path
 
 # import httpx
 from .check_links_helper import (
-    send_discord,
+    BROKEN_STATUS_CODES,
+    OKAY_STATUS_CODES,
+    WARNING_STATUS_CODES,
     check,
     log,
-    BROKEN_STATUS_CODES,
-    WARNING_STATUS_CODES,
-    OKAY_STATUS_CODES,
+    send_discord,
 )
 
 # REPO_ROOT works only if this script is in /scripts

@@ -4,12 +4,12 @@ from pathlib import Path
 
 # import httpx
 from .check_links_helper import (
-    send_discord,
+    BROKEN_STATUS_CODES,
+    OKAY_STATUS_CODES,
+    WARNING_STATUS_CODES,
     check,
     log,
-    BROKEN_STATUS_CODES,
-    WARNING_STATUS_CODES,
-    OKAY_STATUS_CODES,
+    send_discord,
 )
 
 # from . import check_links_helper
