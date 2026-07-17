@@ -58,18 +58,18 @@ def main():
         len(okay_links),
     )
 
-    if broken_links and event_name in ("schedule", "workflow_dispatch"):
-        log.info("Sending Discord webhook with %d BROKEN links", len(broken_links))
-        broken_links.insert(0, f"<@{user_id}>, these links are broken! ⚠️")
-        broken_links.insert(1, f"<{run_url}|Here is the WORKFLOW!>")
-        send_discord(webhook, broken_links)
+    # if broken_links and event_name in ("schedule", "workflow_dispatch"):
+    #     log.info("Sending Discord webhook with %d BROKEN links", len(broken_links))
+    #     broken_links.insert(0, f"<@{user_id}>, these links are broken! ⚠️")
+    #     broken_links.insert(1, f"<{run_url}|Here is the WORKFLOW!>")
+    #     send_discord(webhook, broken_links)
 
     # if you want to test the workflow, use the okay_links
-    # if okay_links and event_name in ("schedule", "workflow_dispatch"):
-    #     log.info("Sending Discord webhook with %d OK lines", len(okay_links))
-    #     okay_links.insert(0, f"<@{user_id}>, these links are broken! ⚠️")
-    #     okay_links.append(f"<{run_url}|Here is the WORKFLOW!>")
-    #     send_discord(webhook, okay_links)
+    if okay_links and event_name in ("schedule", "workflow_dispatch"):
+        log.info("Sending Discord webhook with %d OK lines", len(okay_links))
+        okay_links.insert(0, f"<@{user_id}>, these links are broken! ⚠️")
+        okay_links.insert(1, f"<{run_url}|Here is the WORKFLOW!>")
+        send_discord(webhook, okay_links)
 
     with open(summary_path, "a", encoding="utf-8") as f:
         f.write("### Link check results\n\n")
